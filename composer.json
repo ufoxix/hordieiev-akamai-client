@@ -1,11 +1,23 @@
 {
   "name": "hordieiev/module-akamai-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "N/A",
   "type": "magento2-module",
   "require": {
     "magento/framework": "*",
-    "guzzlehttp/guzzle": "*"
+    "guzzlehttp/guzzle": "^5.3.3|^6.2.1"
+  },
+  "require-dev": {
+    "allure-framework/allure-phpunit": "~1.2.0",
+    "friendsofphp/php-cs-fixer": "~2.13.0",
+    "magento/magento-coding-standard": "~4.0.0",
+    "magento/magento2-functional-testing-framework": "~2.3.14",
+    "pdepend/pdepend": "2.5.2",
+    "phpmd/phpmd": "@stable",
+    "phpunit/phpunit": "~6.5.0",
+    "sebastian/phpcpd": "~3.0.0",
+    "squizlabs/php_codesniffer": "~3.4.2",
+    "mockery/mockery": "1.2.3"
   },
   "license": [
     "OSL-3.0",

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Resolver\GetStoreInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Resolver\GetStore"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\ConfigInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Config"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Validator\CredentialInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Validator\Credential"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Logger\EmulationHandlerInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Logger\EmulationHandler"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Logger\LogHandlerInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Logger\LogHandler"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Client\RequestInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Client\Request"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Client\Auth\TimeStampGeneratorInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Client\Auth\TimeStampGenerator"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Client\Auth\NonceGeneratorInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Client\Auth\NonceGenerator"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\Client\Auth\AuthenticationInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\Client\Auth\Authentication"/>
+    <preference for="Hordieiev\AkamaiClient\Api\Service\PurgeCacheInterface"
+                type="Hordieiev\AkamaiClient\Model\Service\PurgeCache"/>
+
+    <!--define logger-->
+    <virtualType name="AkamaiRequestFileLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/akamai_request.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AkamaiRequestFileLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">AkamaiRequestFileLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Hordieiev\AkamaiClient\Model\Service\Resolver\GetStore">
+        <arguments>
+            <argument name="logger" xsi:type="object">AkamaiRequestFileLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="Hordieiev\AkamaiClient\Model\Service\Validator\Credential">
+        <arguments>
+            <argument name="logger" xsi:type="object">AkamaiRequestFileLogger</argument>
+        </arguments>
+    </type>
+
+    <type name="Hordieiev\AkamaiClient\Model\Service\Logger\LogHandler">
+        <arguments>
+            <argument name="logger" xsi:type="object">AkamaiRequestFileLogger</argument>
+        </arguments>
+    </type>
+    <!--end logger-->
+
+</config>
